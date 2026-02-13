@@ -65,8 +65,13 @@ export default function App() {
   const startRecording = useCallback(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const stream = canvas.captureStream(30);
-    const recorder = new MediaRecorder(stream, { mimeType: 'video/webm' });
+
+    // No framerate arg — browser captures every canvas paint (syncs with rAF)
+    const stream = canvas.captureStream();
+    const mimeType = MediaRecorder.isTypeSupported('video/webm;codecs=vp9')
+      ? 'video/webm;codecs=vp9'
+      : 'video/webm';
+    const recorder = new MediaRecorder(stream, { mimeType });
     chunksRef.current = [];
 
     recorder.ondataavailable = (e) => {
@@ -74,7 +79,7 @@ export default function App() {
     };
 
     recorder.onstop = () => {
-      const blob = new Blob(chunksRef.current, { type: 'video/webm' });
+      const blob = new Blob(chunksRef.current, { type: mimeType });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
@@ -86,7 +91,8 @@ export default function App() {
     };
 
     mediaRecorderRef.current = recorder;
-    recorder.start();
+    // Collect data in 200ms chunks for reliability
+    recorder.start(200);
     setIsRecording(true);
     setRecordedSeconds(0);
 

@@ -38,9 +38,10 @@ export default function Viewport({ characters, sceneIdx, cameraAngle, cameraHeig
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(50, 16 / 9, 0.1, 100);
     const renderer = new THREE.WebGLRenderer({ canvas: canvasRef.current, antialias: true, preserveDrawingBuffer: true });
+    // Use pixelRatio 1 so canvas buffer matches display size — required for captureStream recording
+    renderer.setPixelRatio(1);
     renderer.setSize(640, 360);
     renderer.shadowMap.enabled = true;
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
     sceneRef.current = scene;
     cameraRef.current = camera;
