@@ -41,7 +41,7 @@ export default function App() {
     setCharacters((prev) => {
       const newChar = {
         id: Date.now(),
-        x: positions[prev.length] || 0,
+        x: positions[prev.length] || 0, z: 0,
         skin: COLORS.skin[Math.floor(Math.random() * COLORS.skin.length)],
         shirt: COLORS.shirt[Math.floor(Math.random() * COLORS.shirt.length)],
         pants: COLORS.pants[Math.floor(Math.random() * COLORS.pants.length)],
@@ -55,6 +55,12 @@ export default function App() {
     });
     setSelectedChar(characters.length);
   }, [characters.length]);
+
+  const moveCharacter = useCallback((charIndex, x, z) => {
+    setCharacters((prev) =>
+      prev.map((c, i) => (i === charIndex ? { ...c, x, z } : c))
+    );
+  }, []);
 
   const removeCharacter = useCallback(() => {
     if (characters.length <= 1) return;
@@ -124,6 +130,7 @@ export default function App() {
         cameraHeight={cameraHeight}
         zoom={zoom}
         canvasRef={canvasRef}
+        onCharacterMove={moveCharacter}
       />
 
       {/* Header */}

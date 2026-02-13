@@ -38,11 +38,19 @@ export default function CharacterEditor({
 
       {/* Position */}
       <div className="slider-group">
-        <div className="slider-label">Position X</div>
+        <div className="slider-label">Position X (left/right)</div>
         <input
-          type="range" min={-4} max={4} step={0.25}
+          type="range" min={-8} max={8} step={0.25}
           value={sel.x}
           onChange={(e) => updateChar('x', parseFloat(e.target.value))}
+        />
+      </div>
+      <div className="slider-group">
+        <div className="slider-label">Position Z (near/far)</div>
+        <input
+          type="range" min={-8} max={8} step={0.25}
+          value={sel.z || 0}
+          onChange={(e) => updateChar('z', parseFloat(e.target.value))}
         />
       </div>
 

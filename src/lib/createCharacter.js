@@ -170,6 +170,7 @@ export function createBlockyCharacter(charData) {
   rightLegPivot.add(rightShoe);
 
   group.position.x = charData.x;
+  group.position.z = charData.z || 0;
   group.userData = { charData };
 
   return group;
