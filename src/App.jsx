@@ -37,7 +37,7 @@ export default function App() {
 
   const addCharacter = useCallback(() => {
     if (characters.length >= 4) return;
-    const positions = [-3, -1, 1, 3];
+    const positions = [-1.5, -0.5, 0.5, 1.5];
     setCharacters((prev) => {
       const newChar = {
         id: Date.now(),

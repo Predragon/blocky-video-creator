@@ -21,11 +21,11 @@ export const ACCESSORIES = ['none', 'sunglasses', 'bow', 'crown', 'headband'];
 
 export const DEFAULT_CHARACTERS = [
   {
-    id: 1, x: -1.5, z: 0, skin: '#FFCC99', shirt: '#FF0000', pants: '#1a3a5c',
+    id: 1, x: -0.8, z: 0, skin: '#FFCC99', shirt: '#FF0000', pants: '#1a3a5c',
     hair: '#1a1a1a', hat: 'none', accessory: 'none', animation: 'idle', name: 'Player 1',
   },
   {
-    id: 2, x: 1.5, z: 0, skin: '#8D5524', shirt: '#0066FF', pants: '#2d2d2d',
+    id: 2, x: 0.8, z: 0, skin: '#8D5524', shirt: '#0066FF', pants: '#2d2d2d',
     hair: '#4a2800', hat: '#FF0000', accessory: 'none', animation: 'idle', name: 'Player 2',
   },
 ];
