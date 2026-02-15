@@ -1,4 +1,4 @@
-import { COLORS, ANIMATIONS, ACCESSORIES } from '../lib/constants';
+import { COLORS, ANIMATIONS, ACCESSORIES, HAIR_STYLES, EYE_COLORS, EXPRESSIONS, CLOTHING_TYPES, SOCK_COLORS } from '../lib/constants';
 import ColorGrid from './ColorGrid';
 
 export default function CharacterEditor({
@@ -55,9 +55,69 @@ export default function CharacterEditor({
       </div>
 
       <ColorGrid label="SKIN" colors={COLORS.skin} current={sel.skin} onChange={(v) => updateChar('skin', v)} />
+      <ColorGrid label="HAIR COLOR" colors={COLORS.hair} current={sel.hair} onChange={(v) => updateChar('hair', v)} />
+
+      {/* Hair Style */}
+      <div className="option-group">
+        <div className="option-label">HAIR STYLE</div>
+        <div className="option-buttons">
+          {HAIR_STYLES.map((s) => (
+            <button
+              key={s}
+              onClick={() => updateChar('hairStyle', s)}
+              className={`option-btn ${(sel.hairStyle || 'default') === s ? 'active' : ''}`}
+            >
+              {s.replace('_', ' ')}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <ColorGrid label="EYE COLOR" colors={EYE_COLORS} current={sel.eyeColor || '#111111'} onChange={(v) => updateChar('eyeColor', v)} />
+
+      {/* Expression */}
+      <div className="option-group">
+        <div className="option-label">EXPRESSION</div>
+        <div className="option-buttons">
+          {EXPRESSIONS.map((e) => (
+            <button
+              key={e}
+              onClick={() => updateChar('expression', e)}
+              className={`option-btn ${(sel.expression || 'neutral') === e ? 'active' : ''}`}
+            >
+              {e}
+            </button>
+          ))}
+        </div>
+      </div>
+
       <ColorGrid label="SHIRT" colors={COLORS.shirt} current={sel.shirt} onChange={(v) => updateChar('shirt', v)} />
-      <ColorGrid label="PANTS" colors={COLORS.pants} current={sel.pants} onChange={(v) => updateChar('pants', v)} />
-      <ColorGrid label="HAIR" colors={COLORS.hair} current={sel.hair} onChange={(v) => updateChar('hair', v)} />
+
+      {/* Clothing Type */}
+      <div className="option-group">
+        <div className="option-label">CLOTHING</div>
+        <div className="option-buttons">
+          {CLOTHING_TYPES.map((c) => (
+            <button
+              key={c}
+              onClick={() => updateChar('clothing', c)}
+              className={`option-btn ${(sel.clothing || 'pants') === c ? 'active' : ''}`}
+            >
+              {c}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <ColorGrid
+        label={(sel.clothing === 'skirt' || sel.clothing === 'uniform') ? 'SKIRT COLOR' : 'PANTS COLOR'}
+        colors={COLORS.pants}
+        current={sel.pants}
+        onChange={(v) => updateChar('pants', v)}
+      />
+
+      <ColorGrid label="SOCKS" colors={SOCK_COLORS} current={sel.socks || 'none'} onChange={(v) => updateChar('socks', v)} />
+
       <ColorGrid label="HAT" colors={COLORS.hat} current={sel.hat} onChange={(v) => updateChar('hat', v)} />
 
       {/* Accessory */}

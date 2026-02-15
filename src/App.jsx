@@ -50,6 +50,11 @@ export default function App() {
         accessory: 'none',
         animation: 'idle',
         name: `Player ${prev.length + 1}`,
+        hairStyle: 'default',
+        eyeColor: '#111111',
+        expression: 'neutral',
+        clothing: 'pants',
+        socks: 'none',
       };
       return [...prev, newChar];
     });
